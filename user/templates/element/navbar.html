@@ -33,22 +33,36 @@
         <div class="desktoplogo-1 custom-logo-name-desktop">Chatbot</div>
         <nav class="horizontalMenu clearfix d-md-flex">
             <ul class="horizontalMenu-list">
-                <li aria-haspopup="true"><a href="{% url 'home' %}">Home</a> </li>
+               
                 
                 {% if request.user.groups.all.0.name == 'user' %}
-                    <li aria-haspopup="true"><a href="{% url 'home' %}">Home</a> </li>
-                {% endif %}
+                   <li aria-haspopup="true" ><a href="{% url 'home' %}">Home</a> </li>
+                    <li aria-haspopup="true">
+                        <span class="horizontalMenu-click"><i class="horizontalMenu-arrow fa fa-angle-down "></i></span>
+                        <a href="#" >Profile <span class="fe fe-chevron-down m-0"></span></a>
+                        <ul class="sub-menu">
+                            {% if request.user %}
+                            <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i>My account </a></li>
+                            <li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-light fa-power-off"></i>Log out</a></li>
+                            {% else %}
+                            <li> <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a></li>
+                        {% endif %}
+    
+                        </ul>
+                    </li>
+
+
+                {% else %}
+                <li aria-haspopup="true" class="visible"><a href="{% url 'home' %}">Home</a> </li>
                 <li aria-haspopup="true"><a href="{% url 'profile' %}">profile</a></li>
                 <li aria-haspopup="true" class="p-0 mt-1">
                     <span>
-                        {% if request.user %}
-                            <a class="btn btn-primary" href="{% url 'logout' %}">Log Out</a>
-                        {% else %}
-                            <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a>
-                        {% endif %}
+                        <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a>
                         
                     </span>
                 </li>
+                {% endif %}
             </ul>
         </nav>
     </div>

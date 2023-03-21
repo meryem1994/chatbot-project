@@ -136,3 +136,5 @@ def article(request,id):
         'room_name': str(id),
     }
     return render(request,'article.html', context)
+
+

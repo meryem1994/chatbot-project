@@ -11,4 +11,5 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('article/<int:id>', article, name='article'),
     path('categorie/<int:id>/<int:n>/', categorie, name='categorie'),
+
 ]

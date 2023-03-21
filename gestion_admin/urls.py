@@ -21,5 +21,5 @@ urlpatterns = [
     path('categorie_delete/<int:id>/', delete_categorie, name='delete_categorie'),
     path('niveau_delete/<int:id>/', delete_niveau, name='create_niveau'),
     
-
+   
 ]
