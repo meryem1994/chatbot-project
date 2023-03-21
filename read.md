@@ -20,7 +20,7 @@ username : meryem
 password : mereyem.hanin
 
 # wadie
-username : wadieW
+username : wadie
 password : wadie.123
 
 
