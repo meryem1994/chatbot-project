@@ -14,32 +14,25 @@
                     </div>
                     <div class="card-body">
                         <div class="ads-tabs">
-                            <div class="tabs-menus"> <!-- Tabs -->
-                                <ul class="nav panel-tabs">
-                                    <li class=""><a href="#tab1" class="active" data-bs-toggle="tab">All Historique
-                                            <span class="ms-3 badge badge-primary">{{n_t}}</span></a></li>
-                                    <!--<li><a href="#tab5" data-bs-toggle="tab">Active <span class="ms-3 badge badge-primary">3</span></a></li>
-                                    <li><a href="#tab6" data-bs-toggle="tab">Expired <span class="ms-3 badge badge-primary">1</span></a></li>-->
-                                </ul>
+                            <div class="tabs-menus"> 
+                                
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                      <button class="btn btn-primary float-left"> All Historique
+                                        <span class="badge badge-light">{{n_t}}</span></button>
+                                    </div>
+                                                                
+                                 </div>
+                                
+                                
+                        
                             </div>
                             <div class="tab-content">
-                                <div class="tab-pane  active table-responsive userprof-tab" id="tab1">
-                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 select2-sm no-footer">
-                                        <div class="row">
-                                          
-                                            <div class="col-xl-6 col-sm-12 col-lg-6 col-md-12">
-                                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                                    <label>Search:<input type="search" class="form-control select2-sm form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
-                                                    
-                                            </div>
-                                            <div class="col-xl-6 col-sm-12 col-lg-6 col-md-12">
-                                                <!--<button type="button" class="btn btn-primary col-xl-3 col-sm-5 col-lg-3 col-md-5" style="float:right;">Create</button>-->
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <br><br><table class="data-table-example table table-bordered table-hover mb-0 text-nowrap dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
-                                                    <thead>
+                                <br>
+                                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                
+                                    <thead class="table-success">
                                                         <tr role="row">
                                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Courses: activate to sort column ascending" style="width: 222.422px;">Username</th>
                                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 99.25px;">Article</th>
@@ -74,34 +67,7 @@
 
                                         <br> <br>
 
-                                        {% if n_t > 10 %}
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-5">
-                                                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to {{historique|length}} of {{n_t}}
-                                                        entries</div>
-                                                </div>
-                                                <div class="col-sm-12 col-md-7">
-                                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                                        <ul class="pagination">
-                                                            <li class="paginate_button page-item previous {% if historique.0.id == 1 %}disabled{% endif %}" id="DataTables_Table_0_previous"><a href="{% url 'historique' n_p %}" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-                                                            
-                                                            
-                                                            {% for item in p %}
-                                                                <li class="paginate_button page-item {% if pos == item %}active{% endif %}"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" class="page-link">{{item}}</a></li>
-                                                            {% endfor %}
-                                                            <!--<li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-                                                            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>-->
-
-
-
-
-                                                            <li class="paginate_button page-item next {% if p|last == pos %}disabled{% endif %}" id="DataTables_Table_0_next"><a href="{% url 'historique' n_n %}" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
-                                                        </ul>
-                                                        <br>                    
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
+                                       
                                     </div>
                                 </div>
 
@@ -117,4 +83,39 @@
 {% endblock content %}
 
 {% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable();
+        
+    });
+</script>
+    <script>
+        
+        remove = function(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    parent.window.location.href = '/niveau_delete/'+id;
+                }
+            }); 
+        };
+
+        
+
+        
+        
+        
+        
+    </script>
 {% endblock js %}
