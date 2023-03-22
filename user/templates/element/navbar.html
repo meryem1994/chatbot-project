@@ -53,16 +53,41 @@
                     </li>
 
 
+                {% elif request.user.groups.all.0.name == 'admin' %}
+                <li aria-haspopup="true" ><a href="{% url 'home' %}">Home</a> </li>
+                    <li aria-haspopup="true">
+                        <span class="horizontalMenu-click"><i class="horizontalMenu-arrow fa fa-angle-down "></i></span>
+                        <a href="#" >Profile <span class="fe fe-chevron-down m-0"></span></a>
+                        <ul class="sub-menu">
+                            {% if request.user %}
+                            <li><a href="{% url 'profile' %}"><i class="fa fa-user"></i>My account </a></li>
+                            <li><a href="#"><i class="fa fa-sliders"></i> Settings</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-light fa-power-off"></i>Log out</a></li>
+                            {% else %}
+                            <li> <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a></li>
+                        {% endif %}
+    
+                        </ul>
+                    </li>
                 {% else %}
                 <li aria-haspopup="true" class="visible"><a href="{% url 'home' %}">Home</a> </li>
-                <li aria-haspopup="true"><a href="{% url 'profile' %}">profile</a></li>
-                <li aria-haspopup="true" class="p-0 mt-1">
-                    <span>
-                        <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a>
-                        
-                    </span>
+             
+                <li aria-haspopup="true">
+                    <span class="horizontalMenu-click"><i class="horizontalMenu-arrow fa fa-angle-down "></i></span>
+                    <a href="#" >Profile <span class="fe fe-chevron-down m-0"></span></a>
+                    <ul class="sub-menu">
+                        {% if request.user %}
+                        <li><a href="{% url 'login' %}"><i class="fa fa-user"></i>My account </a></li>
+                        <li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i>Register Now</a></li>
+                       
+                        {% else %}
+                        <li> <a class="btn btn-primary" href="{% url 'register' %}">Register Now</a></li>
+                    {% endif %}
+
+                    </ul>
                 </li>
-                {% endif %}
+               
+            {% endif %}
             </ul>
         </nav>
     </div>
